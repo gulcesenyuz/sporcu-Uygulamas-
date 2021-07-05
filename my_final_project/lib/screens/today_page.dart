@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:my_final_project/config/palette.dart';
 
-class todayPage extends StatefulWidget {
-  const todayPage({Key key}) : super(key: key);
+class TodayPage extends StatefulWidget {
+  const TodayPage({Key key}) : super(key: key);
 
   @override
-  _todayPageState createState() => _todayPageState();
+  _TodayPageState createState() => _TodayPageState();
 }
 
-class _todayPageState extends State<todayPage> {
+class _TodayPageState extends State<TodayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +79,7 @@ class _todayPageState extends State<todayPage> {
                     child: Center(
                       child: Text(
                         'Ooppps Aktivite Kaydı Bulunamadı.',
-                        style: TextStyle(color: Colors.grey,fontSize: 12),
+                        style: TextStyle(color: Colors.grey, fontSize: 12),
                       ),
                     ),
                   ),
@@ -105,7 +104,7 @@ class _todayPageState extends State<todayPage> {
                     child: Center(
                       child: Text(
                         'Ooppps Aktivite Kaydı Bulunamadı.',
-                        style: TextStyle(color: Colors.grey,fontSize: 12),
+                        style: TextStyle(color: Colors.grey, fontSize: 12),
                       ),
                     ),
                   ),

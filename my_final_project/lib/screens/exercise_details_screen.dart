@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:my_final_project/config/palette.dart';
 import 'package:my_final_project/model/exercise.dart';
 import 'package:video_player/video_player.dart';
-
 
 class ExerciseDetailsScreen extends StatefulWidget {
   final Exercise exercise;
@@ -45,13 +43,16 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
         ),
         body: Column(
           children: [
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Card(
                 color: Palette.opacityBlue,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 35,vertical: 35),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 35, vertical: 35),
                   child: Container(
                     child: Text(
                       widget.exercise.information,

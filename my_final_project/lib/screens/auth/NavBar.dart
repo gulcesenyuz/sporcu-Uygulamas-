@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:my_final_project/config/palette.dart';
-import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:my_final_project/screens/bmi_calculator_screen.dart';
 import 'package:my_final_project/screens/calendar.dart';
 import 'package:my_final_project/screens/contact_screen.dart';
@@ -11,7 +9,6 @@ import 'package:my_final_project/screens/my_record_screen.dart';
 import 'package:my_final_project/screens/my_workouts.dart';
 import 'package:my_final_project/screens/nedir.dart';
 import 'package:my_final_project/screens/setting_screen.dart';
-
 
 class NavBar extends StatelessWidget {
   @override
@@ -69,7 +66,7 @@ class NavBar extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => workoutsCard())),
+                MaterialPageRoute(builder: (context) => WorkoutsCard())),
           ),
           ListTile(
             leading: Icon(Icons.directions_run),
@@ -78,7 +75,7 @@ class NavBar extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => myExerciseScreen())),
+                MaterialPageRoute(builder: (context) => MyExerciseScreen())),
           ),
           ListTile(
             leading: Icon(Icons.beenhere),
@@ -106,14 +103,15 @@ class NavBar extends StatelessWidget {
             leading: Icon(Icons.settings),
             title:
                 Text('Ayarlar', style: TextStyle(fontWeight: FontWeight.bold)),
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingScreen())),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => SettingScreen())),
           ),
           ListTile(
             leading: Icon(Icons.assistant_photo),
             title:
                 Text('Destek', style: TextStyle(fontWeight: FontWeight.bold)),
             onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => contactPage())),
+                MaterialPageRoute(builder: (context) => ContactPage())),
           ),
         ],
       ),

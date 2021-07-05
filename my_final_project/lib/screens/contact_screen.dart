@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:my_final_project/config/palette.dart';
-import 'package:my_final_project/screens/auth/widgets/decoration_functions.dart';
-import 'package:my_final_project/model/getContact.dart';
 
+import '../model/getContact.dart';
 
-class contactPage extends StatefulWidget {
-  const contactPage({Key key, this.title}) : super(key: key);
+class ContactPage extends StatefulWidget {
+  const ContactPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _contactPageState createState() => _contactPageState();
+  _ContactPageState createState() => _ContactPageState();
 }
 
-class _contactPageState extends State<contactPage> {
+class _ContactPageState extends State<ContactPage> {
   TextEditingController _subjectController = new TextEditingController();
   TextEditingController _bodyController = new TextEditingController();
 
@@ -40,7 +39,8 @@ class _contactPageState extends State<contactPage> {
                     height: 50,
                     child: Text(
                       'Uygulama hakkındaki tüm \ngörüşlerinizi yazabilirsiniz.',
-                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                   ),
                   Padding(
@@ -48,8 +48,12 @@ class _contactPageState extends State<contactPage> {
                     child: Card(
                       color: Palette.opacityBlue,
                       child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15,vertical: 15),
-                        child: Text('peker.saltuk66.sp@gmail.com',style: TextStyle(fontFamily: 'Roboto'),),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                        child: Text(
+                          'peker.saltuk66.sp@gmail.com',
+                          style: TextStyle(fontFamily: 'Roboto'),
+                        ),
                       ),
                     ),
                   ),

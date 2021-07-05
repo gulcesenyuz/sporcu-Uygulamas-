@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
-import 'package:my_final_project/config/palette.dart';
 import 'package:my_final_project/screens/today_page.dart';
+
 import 'auth/auth.dart';
 import 'package:my_final_project/screens/auth/NavBar.dart';
 
@@ -17,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: todayPage(),
+      body: TodayPage(),
     );
   }
 }

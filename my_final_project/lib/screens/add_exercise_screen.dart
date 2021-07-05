@@ -1,24 +1,73 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_final_project/config/palette.dart';
-import 'package:my_final_project/screens/add_category_screen.dart';
 
-class addExerciseScreen extends StatefulWidget {
-  const addExerciseScreen({Key key}) : super(key: key);
+class AddExerciseScreen extends StatefulWidget {
+  const AddExerciseScreen({Key key}) : super(key: key);
 
   @override
-  _addExerciseScreenState createState() => _addExerciseScreenState();
+  _AddExerciseScreenState createState() => _AddExerciseScreenState();
 }
 
-class _addExerciseScreenState extends State<addExerciseScreen> {
+class _AddExerciseScreenState extends State<AddExerciseScreen> {
   TextEditingController _titleController = new TextEditingController();
   TextEditingController _descriptionController = new TextEditingController();
-  TextEditingController _methodController = new TextEditingController();
-
+  TextEditingController _metodController = new TextEditingController();
+  TextEditingController _howController = new TextEditingController();
+  final databaseReference = FirebaseFirestore.instance;
+  final firebaseUser = FirebaseAuth.instance.currentUser;
   String valueChoose;
-  List listItem = ["...", "yeni kategori ekle"];
+  String _category = "categori1";
+
+  _emptyQ(BuildContext context) {
+    // flutter defined function
+    return showDialog(
+      barrierColor: Color(0xff000000).withOpacity(0.7),
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          backgroundColor: Colors.white.withOpacity(1),
+          title: new Text(
+            "Error",
+            style: TextStyle(
+                fontSize: 16,
+                color: Colors.black.withOpacity(0.6),
+                fontWeight: FontWeight.w600),
+          ),
+          content: new Text(
+            "Başlık adını giriniz",
+            style: TextStyle(
+                fontSize: 14,
+                color: Colors.black.withOpacity(0.6),
+                fontWeight: FontWeight.w400),
+          ),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new TextButton(
+              child: new Text(
+                "Kapat",
+                style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black.withOpacity(0.8),
+                    fontWeight: FontWeight.w600),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -27,13 +76,14 @@ class _addExerciseScreenState extends State<addExerciseScreen> {
             child: Column(
               children: <Widget>[
                 Container(
+                  margin: EdgeInsets.only(top: 20),
                   child: Text(
                     'Başlık',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 15,
                 ),
                 Card(
                   child: Container(
@@ -47,7 +97,7 @@ class _addExerciseScreenState extends State<addExerciseScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 25,
                 ),
                 Container(
                   child: Text(
@@ -56,42 +106,74 @@ class _addExerciseScreenState extends State<addExerciseScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 15,
                 ),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: DropdownButton(
-                    hint: Text("Kategori Seçin."),
-                    icon: Icon(Icons.arrow_drop_down),
-                    iconSize: 36,
-                    isExpanded: true,
-                    underline: SizedBox(),
-                    value: valueChoose,
-                    onChanged: (newValue) {
-                      setState(() {
-                        valueChoose = newValue;
-                      });
-                    },
-                    items: listItem.map((valueItem) {
-                      return DropdownMenuItem(
-                        value: valueItem,
-                        child: Text(valueItem),
-                      );
-                    }).toList(),
-                  ),
+                Card(
+                  child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('Categories')
+                          .snapshots(),
+                      builder: (context, AsyncSnapshot snapshot) {
+                        print(snapshot.hasData);
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return new CircularProgressIndicator();
+                        } else {
+                          if (snapshot.hasError) {
+                            return new Text("fetch error");
+                          } else {
+                            print("*******");
+                            print(_category);
+                            return DropdownButtonHideUnderline(
+                              child: new DropdownButton<dynamic>(
+                                isExpanded: true,
+                                value: _category,
+                                onChanged: (dynamic newValue) {
+                                  setState(() {
+                                    _category = newValue;
+                                  });
+                                },
+                                items: snapshot.data.documents
+                                    .map<DropdownMenuItem<dynamic>>((document) {
+                                  print("ghhgchg");
+                                  print(document.data());
+                                  return new DropdownMenuItem(
+                                      value: document.data()['category name'],
+                                      child: new Container(
+                                        height: 100.0,
+                                        padding: EdgeInsets.fromLTRB(
+                                            5.0, 0.0, 0.0, 0.0),
+                                        //color: primaryColor,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          child: new Text(
+                                            document.data()['category name'],
+                                            style: TextStyle(
+                                                inherit: true,
+                                                color: Colors.black
+                                                    .withOpacity(0.6)),
+                                          ),
+                                        ),
+                                      ));
+                                }).toList(),
+                              ),
+                            );
+                          }
+                        }
+                      }),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 25,
                 ),
                 Container(
                   child: Text(
                     'Açıklama',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                ),
+                SizedBox(
+                  height: 15,
                 ),
                 Card(
                   child: Container(
@@ -110,18 +192,29 @@ class _addExerciseScreenState extends State<addExerciseScreen> {
                 SizedBox(
                   height: 15,
                 ),
-                Container(
-                  child: Text(
-                    'Metod',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                Card(
+                  child: Container(
+                    width: double.infinity,
+                    height: 150,
+                    child: TextField(
+                      controller: _metodController,
+                      maxLines: 7,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: ' Metod',
+                      ),
+                    ),
                   ),
+                ),
+                SizedBox(
+                  height: 15,
                 ),
                 Card(
                   child: Container(
                     width: double.infinity,
                     height: 150,
                     child: TextField(
-                      controller: _descriptionController,
+                      controller: _howController,
                       maxLines: 7,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -133,12 +226,45 @@ class _addExerciseScreenState extends State<addExerciseScreen> {
                 SizedBox(
                   height: 35,
                 ),
-                FloatingActionButton(
-                  // onPressed: ,
-                  backgroundColor: Palette.darkGreen,
-                  tooltip: 'Increment',
-                  child: Icon(Icons.check),
-                ),
+                Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                      color: Palette.darkGreen, shape: BoxShape.circle),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 2),
+                    child: IconButton(
+                        padding: EdgeInsets.all(12),
+                        icon: Icon(
+                          Icons.send_outlined,
+                          color: Colors.white,
+                          size: 22,
+                        ),
+                        onPressed: () async {
+                          if (_titleController.text.isEmpty) {
+                            _emptyQ(context);
+                          } else {
+                            final categoriID =
+                                databaseReference.collection('Exercices').doc();
+                            categoriID.set({
+                              'exercice name': _titleController.text,
+                              'category': _category,
+                              'exercice description':
+                                  _descriptionController.text,
+                              'nasıl yapılır': _howController.text,
+                              'method': _metodController.text,
+                              'hesap sahibi': firebaseUser.uid,
+                              'created': FieldValue.serverTimestamp(),
+                            });
+                            Navigator.pop(context);
+                            _titleController.clear();
+                            _descriptionController.clear();
+                            _metodController.clear();
+                          }
+                          CircularProgressIndicator();
+                        }),
+                  ),
+                )
               ],
             ),
           ),
