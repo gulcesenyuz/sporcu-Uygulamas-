@@ -79,146 +79,142 @@ class _MyExerciseScreenState extends State<MyExerciseScreen>
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Container(
-            height: 700,
-            child: Stack(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: deviceSize.height * 0.03,
-                      bottom: deviceSize.height * 0.02),
-                  child: Container(
-                    child: StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance
-                          .collection('Categories')
-                          .orderBy('created', descending: true)
-                          .snapshots(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.data == null)
-                          return Center(
-                            child: CircularProgressIndicator(
-                              backgroundColor: Colors.black,
-                            ),
-                          );
-                        final length = snapshot.data.docs.length;
-                        print(length);
-                        return ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: length,
-                            itemBuilder: (context, int index) {
-                              final DocumentSnapshot data =
-                                  snapshot.data.docs[index];
-                              print(data.data());
-                              if (data['created'].toDate() == null)
-                                Center(child: CircularProgressIndicator());
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ExerciseScreen(
-                                              exName: data['category name'])));
-                                },
-                                child: categoryCard(data['category name'],
-                                    data['category description']),
-                              );
-                            });
-                      },
-                    ),
+        child: Container(
+          height: 700,
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                    top: deviceSize.height * 0.03,
+                    bottom: deviceSize.height * 0.02),
+                child: Container(
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('Categories')
+                        .orderBy('created', descending: true)
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.data == null)
+                        return Center(
+                          child: CircularProgressIndicator(
+                            backgroundColor: Colors.black,
+                          ),
+                        );
+                      final length = snapshot.data.docs.length;
+                      print(length);
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: length,
+                          itemBuilder: (context, int index) {
+                            final DocumentSnapshot data =
+                                snapshot.data.docs[index];
+                            print(data.data());
+                            if (data['created'].toDate() == null)
+                              Center(child: CircularProgressIndicator());
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ExerciseScreen(
+                                            exName: data['category name'])));
+                              },
+                              child: categoryCard(data['category name'],
+                                  data['category description']),
+                            );
+                          });
+                    },
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 500, left: 200),
-                  child: Stack(
-                    alignment: Alignment.bottomRight,
-                    children: <Widget>[
-                      IgnorePointer(
-                        child: Container(
-                          color: Colors.transparent,
-                          height: 150.0,
-                          width: 150.0,
-                        ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 500, left: 200),
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: <Widget>[
+                    IgnorePointer(
+                      child: Container(
+                        color: Colors.transparent,
+                        height: 150.0,
+                        width: 150.0,
                       ),
-                      Transform.translate(
-                        offset: Offset.fromDirection(getRadiansFromDegree(270),
-                            degOneTranslationAnimation.value * 100),
-                        child: Transform(
-                          transform: Matrix4.rotationZ(
-                              getRadiansFromDegree(rotationAnimation.value))
-                            ..scale(degOneTranslationAnimation.value),
-                          alignment: Alignment.center,
-                          child: CircularButton(
-                            color: Color(0xffae9b87),
-                            width: 50,
-                            height: 50,
-                            icon: Icon(
-                              Icons.directions_run,
-                              color: Colors.white,
-                            ),
-                            onClick: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddExerciseScreen()));
-                            },
-                          ),
-                        ),
-                      ),
-                      Transform.translate(
-                        offset: Offset.fromDirection(getRadiansFromDegree(180),
-                            degThreeTranslationAnimation.value * 100),
-                        child: Transform(
-                          transform: Matrix4.rotationZ(
-                              getRadiansFromDegree(rotationAnimation.value))
-                            ..scale(degThreeTranslationAnimation.value),
-                          alignment: Alignment.center,
-                          child: CircularButton(
-                            color: Color(0xffae9b87),
-                            width: 50,
-                            height: 50,
-                            icon: Icon(
-                              Icons.category,
-                              color: Colors.white,
-                            ),
-                            onClick: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddCategoryScreen()));
-                            },
-                          ),
-                        ),
-                      ),
-                      Transform(
+                    ),
+                    Transform.translate(
+                      offset: Offset.fromDirection(getRadiansFromDegree(270),
+                          degOneTranslationAnimation.value * 100),
+                      child: Transform(
                         transform: Matrix4.rotationZ(
-                            getRadiansFromDegree(rotationAnimation.value)),
+                            getRadiansFromDegree(rotationAnimation.value))
+                          ..scale(degOneTranslationAnimation.value),
                         alignment: Alignment.center,
                         child: CircularButton(
-                          color: Palette.darkGreen,
-                          width: 60,
-                          height: 60,
+                          color: Color(0xffae9b87),
+                          width: 50,
+                          height: 50,
                           icon: Icon(
-                            Icons.menu,
+                            Icons.directions_run,
                             color: Colors.white,
                           ),
                           onClick: () {
-                            if (animationController.isCompleted) {
-                              animationController.reverse();
-                            } else {
-                              animationController.forward();
-                            }
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddExerciseScreen()));
                           },
                         ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
+                      ),
+                    ),
+                    Transform.translate(
+                      offset: Offset.fromDirection(getRadiansFromDegree(180),
+                          degThreeTranslationAnimation.value * 100),
+                      child: Transform(
+                        transform: Matrix4.rotationZ(
+                            getRadiansFromDegree(rotationAnimation.value))
+                          ..scale(degThreeTranslationAnimation.value),
+                        alignment: Alignment.center,
+                        child: CircularButton(
+                          color: Color(0xffae9b87),
+                          width: 50,
+                          height: 50,
+                          icon: Icon(
+                            Icons.category,
+                            color: Colors.white,
+                          ),
+                          onClick: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddCategoryScreen()));
+                          },
+                        ),
+                      ),
+                    ),
+                    Transform(
+                      transform: Matrix4.rotationZ(
+                          getRadiansFromDegree(rotationAnimation.value)),
+                      alignment: Alignment.center,
+                      child: CircularButton(
+                        color: Palette.darkGreen,
+                        width: 60,
+                        height: 60,
+                        icon: Icon(
+                          Icons.menu,
+                          color: Colors.white,
+                        ),
+                        onClick: () {
+                          if (animationController.isCompleted) {
+                            animationController.reverse();
+                          } else {
+                            animationController.forward();
+                          }
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

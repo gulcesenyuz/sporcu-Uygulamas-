@@ -122,8 +122,6 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                           if (snapshot.hasError) {
                             return new Text("fetch error");
                           } else {
-                            print("*******");
-                            print(_category);
                             return DropdownButtonHideUnderline(
                               child: new DropdownButton<dynamic>(
                                 isExpanded: true,
@@ -140,7 +138,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                                   return new DropdownMenuItem(
                                       value: document.data()['category name'],
                                       child: new Container(
-                                        height: 100.0,
+                                        height: 50.0,
                                         padding: EdgeInsets.fromLTRB(
                                             5.0, 0.0, 0.0, 0.0),
                                         //color: primaryColor,

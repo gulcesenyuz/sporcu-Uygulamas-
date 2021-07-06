@@ -61,6 +61,7 @@ class _WorkoutsCardState extends State<WorkoutsCard> {
                             Center(child: CircularProgressIndicator());
                           return GestureDetector(
                             child: workoutCard(
+                              data['egitim adı'],
                               data['score'],
                               data['RepNum'],
                               data['SetNum'],

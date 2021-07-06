@@ -16,6 +16,7 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
   TextEditingController _repController = new TextEditingController();
   TextEditingController _metodController = new TextEditingController();
   TextEditingController _howController = new TextEditingController();
+  TextEditingController _nameController = new TextEditingController();
   final databaseReference = FirebaseFirestore.instance;
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String valueChoose;
@@ -80,6 +81,27 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: Text(
+                    'Eğitim Adı',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Card(
+                  child: Container(
+                    child: TextField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Eğitim',
+                      ),
+                    ),
+                  ),
+                ),
                 Container(
                   margin: EdgeInsets.only(top: 20),
                   child: Text(
@@ -464,6 +486,7 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                             final categoriID =
                                 databaseReference.collection('Egitimler').doc();
                             categoriID.set({
+                              "egitim adı": _nameController.text,
                               'SetNum': _setController.text,
                               'RepNum': _repController.text,
                               'category': _category,

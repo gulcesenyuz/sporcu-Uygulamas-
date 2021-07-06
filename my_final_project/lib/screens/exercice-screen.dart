@@ -32,45 +32,43 @@ class _ExerciseScreenState extends State<ExerciseScreen>
               padding: EdgeInsets.only(
                   top: deviceSize.height * 0.03,
                   bottom: deviceSize.height * 0.02),
-              child: SingleChildScrollView(
-                child: Container(
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('Exercices')
-                        .where('category', isEqualTo: widget.exName)
-                        .snapshots(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                      print(widget.exName);
-                      print(snapshot.data);
+              child: Container(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Exercices')
+                      .where('category', isEqualTo: widget.exName)
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    print(widget.exName);
+                    print(snapshot.data);
 
-                      if (snapshot.data == null)
-                        return Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: Colors.black,
-                          ),
-                        );
-                      final length = snapshot.data.docs.length;
-                      print(length);
-                      return ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: length,
-                          itemBuilder: (context, int index) {
-                            final DocumentSnapshot data =
-                                snapshot.data.docs[index];
-                            print(data.data());
-                            if (data['created'].toDate() == null)
-                              Center(child: CircularProgressIndicator());
-                            return exercicesCard(
-                                data['created'].toDate(),
-                                data['category'],
-                                data['exercice description'],
-                                data['exercice name'],
-                                data['nasıl yapılır'],
-                                data['method']);
-                          });
-                    },
-                  ),
+                    if (snapshot.data == null)
+                      return Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.black,
+                        ),
+                      );
+                    final length = snapshot.data.docs.length;
+                    print(length);
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: length,
+                        itemBuilder: (context, int index) {
+                          final DocumentSnapshot data =
+                              snapshot.data.docs[index];
+                          print(data.data());
+                          if (data['created'].toDate() == null)
+                            Center(child: CircularProgressIndicator());
+                          return exercicesCard(
+                              data['created'].toDate(),
+                              data['category'],
+                              data['exercice description'],
+                              data['exercice name'],
+                              data['nasıl yapılır'],
+                              data['method']);
+                        });
+                  },
                 ),
               ),
             ),

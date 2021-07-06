@@ -3,7 +3,7 @@ import 'package:my_final_project/config/palette.dart';
 
 import 'exercice-card-field.dart';
 
-Widget workoutCard(score, sets, tekrar, ex1, ex2, ex3) {
+Widget workoutCard(name, score, sets, tekrar, ex1, ex2, ex3) {
   return Card(
     child: Container(
       child: Padding(
@@ -12,12 +12,15 @@ Widget workoutCard(score, sets, tekrar, ex1, ex2, ex3) {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            exCardField('Score:', score),
-            exCardField('Set Sayısı:', sets),
-            exCardField('Tekrar Sayısı', tekrar),
-            exCardField('Egzersiz 1', ex1),
-            exCardField('Egzersiz 2', ex2),
-            exCardField('Egzersiz 3', ex3),
+            Center(
+              child: exCardNameField(name),
+            ),
+            exCardField('Score: ', score),
+            exCardField('Set Sayısı: ', sets),
+            exCardField('Tekrar Sayısı: ', tekrar),
+            exCardField('Egzersiz 1: ', ex1),
+            exCardField('Egzersiz 2: ', ex2),
+            exCardField('Egzersiz 3: ', ex3),
           ],
         ),
       ),
