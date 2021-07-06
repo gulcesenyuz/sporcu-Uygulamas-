@@ -21,9 +21,9 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String valueChoose;
   String _category = "categori1";
-  String _ex1 = "ex1";
-  String _ex2 = "ex2";
-  String _ex3 = "ex3";
+  String _ex1 = "egzersiz";
+  String _ex2 = "egzersiz";
+  String _ex3 = "egzersiz";
   int x, y;
   var score;
 
@@ -96,8 +96,9 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                     child: TextField(
                       controller: _nameController,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
-                        hintText: 'Eğitim',
+                        hintText: 'eğitim',
                       ),
                     ),
                   ),
@@ -117,6 +118,7 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                     child: TextField(
                       controller: _setController,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
                         hintText: ' Örn: 3',
                       ),
@@ -141,6 +143,7 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                     child: TextField(
                       controller: _repController,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
                         hintText: ' Örn: 3',
                       ),
@@ -199,7 +202,7 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                                       child: new Container(
                                         height: 100.0,
                                         padding: EdgeInsets.fromLTRB(
-                                            5.0, 0.0, 0.0, 0.0),
+                                            10.0, 0.0, 0.0, 0.0),
                                         //color: primaryColor,
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
@@ -277,7 +280,7 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                                       child: new Container(
                                         height: 100.0,
                                         padding: EdgeInsets.fromLTRB(
-                                            5.0, 0.0, 0.0, 0.0),
+                                            10.0, 0.0, 0.0, 0.0),
                                         //color: primaryColor,
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
@@ -343,7 +346,7 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                                       child: new Container(
                                         height: 100.0,
                                         padding: EdgeInsets.fromLTRB(
-                                            5.0, 0.0, 0.0, 0.0),
+                                            10.0, 0.0, 0.0, 0.0),
                                         //color: primaryColor,
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
@@ -408,7 +411,7 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                                       child: new Container(
                                         height: 100.0,
                                         padding: EdgeInsets.fromLTRB(
-                                            5.0, 0.0, 0.0, 0.0),
+                                            10.0, 0.0, 0.0, 0.0),
                                         //color: primaryColor,
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
@@ -449,7 +452,9 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
-                      (_repController.text != "" && _repController.text != "")
+                      (_repController.text != "" &&
+                              _repController.text != "" &&
+                              _nameController.text != "")
                           ? Text(
                               score = (int.parse(_repController.text) *
                                       int.parse(_setController.text))

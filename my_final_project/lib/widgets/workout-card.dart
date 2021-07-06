@@ -28,7 +28,7 @@ Widget workoutCard(name, score, sets, tekrar, ex1, ex2, ex3) {
   );
 }
 
-Widget scoreCard(score, sets, tekrar, ex1, ex2, ex3) {
+Widget scoreCard(name, score, sets, tekrar, ex1, ex2, ex3) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
     child: Card(
@@ -40,6 +40,9 @@ Widget scoreCard(score, sets, tekrar, ex1, ex2, ex3) {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Center(
+                    child: exCardNameField(name),
+                  ),
                   exCardField('Set Sayısı:', sets),
                   exCardField('Tekrar Sayısı', tekrar),
                   exCardField('Egzersiz 1', ex1),

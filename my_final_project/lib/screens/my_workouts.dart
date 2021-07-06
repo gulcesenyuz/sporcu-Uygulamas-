@@ -59,6 +59,21 @@ class _WorkoutsCardState extends State<WorkoutsCard> {
                           print(data.data());
                           if (data['created'].toDate() == null)
                             Center(child: CircularProgressIndicator());
+                          if (data['egzersiz1'] == 'egzersiz' ||
+                              data['egzersiz2'] == 'egzersiz' ||
+                              data['egzersiz3'] == 'egzersiz') {
+                            return GestureDetector(
+                              child: workoutCard(
+                                data['egitim adı'],
+                                data['score'],
+                                data['RepNum'],
+                                data['SetNum'],
+                                "egzersiz tanımlanmadı",
+                                "egzersiz tanımlanmadı",
+                                "egzersiz tanımlanmadı",
+                              ),
+                            );
+                          }
                           return GestureDetector(
                             child: workoutCard(
                               data['egitim adı'],

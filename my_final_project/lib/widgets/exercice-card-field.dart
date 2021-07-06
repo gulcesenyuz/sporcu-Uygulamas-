@@ -24,9 +24,12 @@ Widget exCardNameField(data) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
-        data,
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      Container(
+        margin: EdgeInsets.only(bottom: 10, top: 5),
+        child: Text(
+          data,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
       ),
     ],
   );

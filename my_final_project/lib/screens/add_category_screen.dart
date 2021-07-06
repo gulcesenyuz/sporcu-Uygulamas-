@@ -82,6 +82,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                     child: TextField(
                       controller: _titleController,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
                         hintText: ' Örn: Omuz',
                       ),
@@ -105,6 +106,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                       controller: _descriptionController,
                       maxLines: 7,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
                         hintText: ' Bu kategoriyi açıklayın.',
                       ),

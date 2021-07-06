@@ -90,6 +90,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                     child: TextField(
                       controller: _titleController,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
                         hintText: ' Örn: Barfiks',
                       ),
@@ -140,7 +141,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                                       child: new Container(
                                         height: 50.0,
                                         padding: EdgeInsets.fromLTRB(
-                                            5.0, 0.0, 0.0, 0.0),
+                                            10.0, 0.0, 0.0, 0.0),
                                         //color: primaryColor,
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
@@ -181,6 +182,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                       controller: _descriptionController,
                       maxLines: 7,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
                         hintText: ' Bu egzersiz ne için ?',
                       ),
@@ -198,6 +200,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                       controller: _metodController,
                       maxLines: 7,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
                         hintText: ' Metod',
                       ),
@@ -215,6 +218,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                       controller: _howController,
                       maxLines: 7,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
                         hintText: ' Bu egzersiz nasıl yapılır ?',
                       ),

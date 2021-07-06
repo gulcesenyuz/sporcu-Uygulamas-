@@ -30,7 +30,8 @@ class RecordScreen extends StatelessWidget {
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('Egitimler')
-                      .orderBy('score', descending: true)
+                      .orderBy('score', descending: false)
+                      .limit(3)
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -52,6 +53,7 @@ class RecordScreen extends StatelessWidget {
                           if (data['created'].toDate() == null)
                             Center(child: CircularProgressIndicator());
                           return scoreCard(
+                            data['egitim adı'],
                             data['score'],
                             data['RepNum'],
                             data['SetNum'],
