@@ -35,10 +35,18 @@ dependencies:
   animations: ^2.0.0
   firebase_auth_oauth_web: ^0.2.1
   video_player: ^2.1.6
+
   cloud_firestore: ^0.14.4
   url_launcher: ^6.0.5
   http: ^0.12.2
   image_picker: ^0.6.7+22
+  firebase_storage:
+  
+
+ 
+
+
+
   syncfusion_flutter_calendar: ^19.1.69
 
 dev_dependencies:

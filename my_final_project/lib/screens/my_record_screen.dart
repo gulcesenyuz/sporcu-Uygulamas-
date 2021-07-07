@@ -19,51 +19,48 @@ class RecordScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Container(
-            height: 700,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  top: deviceSize.height * 0.03,
-                  bottom: deviceSize.height * 0.02),
-              child: Container(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('Egitimler')
-                      .orderBy('score', descending: false)
-                      .limit(3)
-                      .snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.data == null)
-                      return Center(
-                        child: CircularProgressIndicator(
-                          backgroundColor: Colors.black,
-                        ),
-                      );
-                    final length = snapshot.data.docs.length;
-                    print(length);
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: length,
-                        itemBuilder: (context, int index) {
-                          final DocumentSnapshot data =
-                              snapshot.data.docs[index];
-                          print(data.data());
-                          if (data['created'].toDate() == null)
-                            Center(child: CircularProgressIndicator());
-                          return scoreCard(
-                            data['egitim adı'],
-                            data['score'],
-                            data['RepNum'],
-                            data['SetNum'],
-                            data['egzersiz1'],
-                            data['egzersiz2'],
-                            data['egzersiz3'],
-                          );
-                        });
-                  },
-                ),
+        child: Container(
+          height: 700,
+          child: Padding(
+            padding: EdgeInsets.only(
+                top: deviceSize.height * 0.03,
+                bottom: deviceSize.height * 0.02),
+            child: Container(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('Egitimler')
+                    .orderBy('score', descending: false)
+                    .limit(3)
+                    .snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.data == null)
+                    return Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.black,
+                      ),
+                    );
+                  final length = snapshot.data.docs.length;
+                  print(length);
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: length,
+                      itemBuilder: (context, int index) {
+                        final DocumentSnapshot data = snapshot.data.docs[index];
+                        print(data.data());
+                        if (data['created'].toDate() == null)
+                          Center(child: CircularProgressIndicator());
+                        return scoreCard(
+                          data['egitim adı'],
+                          data['score'],
+                          data['RepNum'],
+                          data['SetNum'],
+                          data['egzersiz1'],
+                          data['egzersiz2'],
+                          data['egzersiz3'],
+                        );
+                      });
+                },
               ),
             ),
           ),
