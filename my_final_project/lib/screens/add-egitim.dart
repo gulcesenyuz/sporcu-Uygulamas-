@@ -116,7 +116,7 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                 Card(
                   child: Container(
                     child: TextField(
-                      keyboardgit aType: TextInputType.number,
+                      keyboardType: TextInputType.number,
                       controller: _setController,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(10),
