@@ -51,6 +51,7 @@ class RecordScreen extends StatelessWidget {
                         if (data['created'].toDate() == null)
                           Center(child: CircularProgressIndicator());
                         return scoreCard(
+                          data['created'].toDate(),
                           data['egitim adı'],
                           data['score'],
                           data['RepNum'],
