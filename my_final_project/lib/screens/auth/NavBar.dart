@@ -10,8 +10,6 @@ import 'package:my_final_project/screens/my_workouts.dart';
 import 'package:my_final_project/screens/nedir.dart';
 import 'package:my_final_project/screens/setting_screen.dart';
 
-import '../Videos.dart';
-
 class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -57,7 +55,7 @@ class NavBar extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => nedirPage(),
+                builder: (context) => NedirPage(),
               ),
             ),
           ),
@@ -100,15 +98,6 @@ class NavBar extends StatelessWidget {
             ),
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => calendarScreen())),
-          ),
-          ListTile(
-            leading: Icon(Icons.web_sharp),
-            title: Text(
-              'Videolar',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Videos())),
           ),
           ListTile(
             leading: Icon(Icons.settings),

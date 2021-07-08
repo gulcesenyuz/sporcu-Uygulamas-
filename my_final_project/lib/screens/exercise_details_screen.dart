@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_final_project/config/palette.dart';
-import 'package:my_final_project/model/exercise.dart';
 import 'package:video_player/video_player.dart';
 
 class ExerciseDetailsScreen extends StatefulWidget {
-  final Exercise exercise;
-  ExerciseDetailsScreen(this.exercise);
+  String name;
+  String info;
+  String link;
+
+  ExerciseDetailsScreen({this.name, this.info, this.link});
 
   //final String title = "Video Demo";
 
@@ -15,15 +17,16 @@ class ExerciseDetailsScreen extends StatefulWidget {
 
 class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
   VideoPlayerController _controller;
-  Future<void> _initializeVideoPlayerFuture;
 
   @override
   void initState() {
-    // _controller = VideoPlayerController.network(widget.exercise.localVideo);
-    _controller = VideoPlayerController.asset(widget.exercise.localVideo);
-    _initializeVideoPlayerFuture = _controller.initialize();
-    _controller.setLooping(true);
-    _controller.setVolume(0.0);
+    _controller = VideoPlayerController.network(widget.link)
+      ..initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {
+          print("set");
+        });
+      });
     super.initState();
   }
 
@@ -38,7 +41,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.exercise.title),
+          title: Text(widget.name),
           backgroundColor: Palette.darkOrange,
         ),
         body: Column(
@@ -55,7 +58,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
                       const EdgeInsets.symmetric(horizontal: 35, vertical: 35),
                   child: Container(
                     child: Text(
-                      widget.exercise.information,
+                      widget.info,
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -69,32 +72,23 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
             SizedBox(
               height: 18,
             ),
-            FutureBuilder(
-              future: _initializeVideoPlayerFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller),
-                  );
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
+            Center(
+              child: _controller.value.isInitialized
+                  ? AspectRatio(
+                      aspectRatio: _controller.value.aspectRatio,
+                      child: VideoPlayer(_controller),
+                    )
+                  : Container(),
+            )
           ],
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Palette.darkGreen,
           onPressed: () {
             setState(() {
-              if (_controller.value.isPlaying) {
-                _controller.pause();
-              } else {
-                _controller.play();
-              }
+              _controller.value.isPlaying
+                  ? _controller.pause()
+                  : _controller.play();
             });
           },
           child: Icon(
