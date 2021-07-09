@@ -33,7 +33,7 @@ Widget scoreCard(time, name, score, sets, tekrar, ex1, ex2, ex3, deviceSize) {
     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
     child: Card(
       child: Container(
-          child: Stack(
+          child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -56,8 +56,7 @@ Widget scoreCard(time, name, score, sets, tekrar, ex1, ex2, ex3, deviceSize) {
             width: 50,
           ),
           Container(
-            margin: EdgeInsets.only(
-                top: 200, left: deviceSize.width - 180, bottom: 10),
+            margin: EdgeInsets.only(left: deviceSize.width - 180, bottom: 10),
             child: Row(
               children: [
                 Padding(

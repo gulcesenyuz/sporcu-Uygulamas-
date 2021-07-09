@@ -65,7 +65,7 @@ class _WorkoutsCardState extends State<WorkoutsCard> {
                             return GestureDetector(
                               child: workoutCard(
                                 data['egitim adı'],
-                                data['score'],
+                                data['score'].toString(),
                                 data['RepNum'],
                                 data['SetNum'],
                                 data['egzersiz1'],
@@ -77,7 +77,7 @@ class _WorkoutsCardState extends State<WorkoutsCard> {
                           return GestureDetector(
                             child: workoutCard(
                               data['egitim adı'],
-                              data['score'],
+                              data['score'].toString(),
                               data['RepNum'],
                               data['SetNum'],
                               data['egzersiz1'],

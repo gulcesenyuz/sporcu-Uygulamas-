@@ -2,9 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_final_project/widgets/workout-card.dart';
 
-class RecordScreen extends StatelessWidget {
+class RecordScreen extends StatefulWidget {
   const RecordScreen({Key key}) : super(key: key);
 
+  @override
+  _RecordScreenState createState() => _RecordScreenState();
+}
+
+class _RecordScreenState extends State<RecordScreen> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -29,7 +34,7 @@ class RecordScreen extends StatelessWidget {
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Egitimler')
-                    .orderBy('score', descending: false)
+                    .orderBy('score', descending: true)
                     .limit(3)
                     .snapshots(),
                 builder: (BuildContext context,
@@ -53,7 +58,7 @@ class RecordScreen extends StatelessWidget {
                         return scoreCard(
                             data['created'].toDate(),
                             data['egitim adı'],
-                            data['score'],
+                            data['score'].toString(),
                             data['RepNum'],
                             data['SetNum'],
                             data['egzersiz1'],

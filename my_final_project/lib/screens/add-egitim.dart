@@ -498,7 +498,7 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                               'egzersiz2': _ex2,
                               'egzersiz3': _ex3,
                               'hesap sahibi': firebaseUser.uid,
-                              "score": score,
+                              "score": int.parse(score),
                               'created': FieldValue.serverTimestamp(),
                             });
                             Navigator.pop(context);
