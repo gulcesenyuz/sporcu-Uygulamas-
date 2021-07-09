@@ -20,10 +20,10 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
   final databaseReference = FirebaseFirestore.instance;
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String valueChoose;
-  String _category = "categori1";
-  String _ex1 = "egzersiz";
-  String _ex2 = "egzersiz";
-  String _ex3 = "egzersiz";
+  String _category = "";
+  String _ex1 = "";
+  String _ex2 = "";
+  String _ex3 = "";
   int x, y;
   var score;
 
@@ -269,9 +269,6 @@ class _AddEgitimScreenState extends State<AddEgitimScreen> {
                                 onChanged: (dynamic val) {
                                   setState(() {
                                     _ex1 = val;
-                                    print("_ex");
-
-                                    print(_ex1);
                                   });
                                 },
                                 items: snapshot.data.documents

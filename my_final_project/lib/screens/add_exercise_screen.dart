@@ -19,7 +19,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
   final databaseReference = FirebaseFirestore.instance;
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String valueChoose;
-  String _category = "categori1";
+  String _category = "";
 
   _emptyQ(BuildContext context) {
     // flutter defined function
@@ -126,7 +126,18 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                             return DropdownButtonHideUnderline(
                               child: new DropdownButton<dynamic>(
                                 isExpanded: true,
-                                value: _category,
+                                hint: Row(
+                                  children: [
+                                    Container(
+                                      width: 150, //and here
+                                      child: Text(
+                                        _category,
+                                        style: TextStyle(color: Colors.grey),
+                                        textAlign: TextAlign.end,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 onChanged: (dynamic newValue) {
                                   setState(() {
                                     _category = newValue;

@@ -28,41 +28,49 @@ Widget workoutCard(name, score, sets, tekrar, ex1, ex2, ex3) {
   );
 }
 
-Widget scoreCard(time, name, score, sets, tekrar, ex1, ex2, ex3) {
+Widget scoreCard(time, name, score, sets, tekrar, ex1, ex2, ex3, deviceSize) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
     child: Card(
       child: Container(
-        child: Column(
-          children: [
-            Row(
+          child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: exCardNameField(name),
+                ),
+                exCardField('Set Sayısı: ', sets),
+                exCardField('Tekrar Sayısı: ', tekrar),
+                exCardField('Egzersiz 1: ', ex1),
+                exCardField('Egzersiz 2: ', ex2),
+                exCardField('Egzersiz 3: ', ex3),
+                exCardField('Tarih: ', time.toString())
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 50,
+          ),
+          Container(
+            margin: EdgeInsets.only(
+                top: 200, left: deviceSize.width - 180, bottom: 10),
+            child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: exCardNameField(name),
-                      ),
-                      exCardField('Set Sayısı:', sets),
-                      exCardField('Tekrar Sayısı', tekrar),
-                      exCardField('Egzersiz 1', ex1),
-                      exCardField('Egzersiz 2', ex2),
-                      exCardField('Egzersiz 3', ex3),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 50,
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Text('Score: '),
                 ),
                 Container(
                   width: 90,
-                  height: 90,
+                  height: 60,
                   decoration: BoxDecoration(
-                    color: Palette.orange,
-                    shape: BoxShape.circle,
-                  ),
+                      color: Palette.orange,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20)),
                   child: Center(
                     child: Text(
                       score,
@@ -73,14 +81,9 @@ Widget scoreCard(time, name, score, sets, tekrar, ex1, ex2, ex3) {
                 ),
               ],
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-              child: exCardField('Tarih: ', time.toString()),
-            )
-          ],
-        ),
-      ),
+          ),
+        ],
+      )),
     ),
   );
 }

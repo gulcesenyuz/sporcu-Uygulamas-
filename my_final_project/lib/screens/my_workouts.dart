@@ -68,9 +68,9 @@ class _WorkoutsCardState extends State<WorkoutsCard> {
                                 data['score'],
                                 data['RepNum'],
                                 data['SetNum'],
-                                "egzersiz tanımlanmadı",
-                                "egzersiz tanımlanmadı",
-                                "egzersiz tanımlanmadı",
+                                data['egzersiz1'],
+                                data['egzersiz2'],
+                                data['egzersiz3'],
                               ),
                             );
                           }
