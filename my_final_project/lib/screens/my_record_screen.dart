@@ -56,15 +56,16 @@ class _RecordScreenState extends State<RecordScreen> {
                         if (data['created'].toDate() == null)
                           Center(child: CircularProgressIndicator());
                         return scoreCard(
-                            data['created'].toDate(),
-                            data['egitim adı'],
-                            data['score'].toString(),
-                            data['RepNum'],
-                            data['SetNum'],
-                            data['egzersiz1'],
-                            data['egzersiz2'],
-                            data['egzersiz3'],
-                            deviceSize);
+                          data['created'].toDate(),
+                          data['egitim adı'],
+                          data['score'].toString(),
+                          data['RepNum'],
+                          data['SetNum'],
+                          data['egzersiz1'],
+                          data['egzersiz2'],
+                          data['egzersiz3'],
+                          deviceSize,
+                        );
                       });
                 },
               ),

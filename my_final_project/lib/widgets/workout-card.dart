@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_final_project/config/palette.dart';
+import 'package:my_final_project/screens/auth/widgets/delete.dart';
 
 import 'exercice-card-field.dart';
 
-Widget workoutCard(name, score, sets, tekrar, ex1, ex2, ex3) {
+Widget workoutCard(name, score, sets, tekrar, ex1, ex2, ex3, context,
+    collection, data, deviceSize) {
   return Card(
     child: Container(
       child: Padding(
@@ -21,6 +23,11 @@ Widget workoutCard(name, score, sets, tekrar, ex1, ex2, ex3) {
             exCardField('Egzersiz 1: ', ex1),
             exCardField('Egzersiz 2: ', ex2),
             exCardField('Egzersiz 3: ', ex3),
+            IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  pdfDeleteBox(context, collection, data, deviceSize);
+                }),
           ],
         ),
       ),

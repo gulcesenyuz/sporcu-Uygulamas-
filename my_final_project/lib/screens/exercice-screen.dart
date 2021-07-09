@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:my_final_project/widgets/exercice-card.dart';
 
+import 'auth/widgets/delete.dart';
+
 class ExerciseScreen extends StatefulWidget {
   String exName;
 
@@ -60,13 +62,23 @@ class _ExerciseScreenState extends State<ExerciseScreen>
                           print(data.data());
                           if (data['created'].toDate() == null)
                             Center(child: CircularProgressIndicator());
-                          return exercicesCard(
-                              data['created'].toDate(),
-                              data['category'],
-                              data['exercice description'],
-                              data['exercice name'],
-                              data['nasıl yapılır'],
-                              data['method']);
+                          return GestureDetector(
+                            onLongPress: () {
+                              pdfDeleteBox(
+                                  context, 'Exercices', data.id, deviceSize);
+                            },
+                            child: exercicesCard(
+                                data['created'].toDate(),
+                                data['category'],
+                                data['exercice description'],
+                                data['exercice name'],
+                                data['nasıl yapılır'],
+                                data['method'],
+                                context,
+                                'Exercices',
+                                data.id,
+                                deviceSize),
+                          );
                         });
                   },
                 ),

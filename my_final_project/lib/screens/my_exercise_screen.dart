@@ -7,6 +7,7 @@ import 'package:my_final_project/widgets/category-Card.dart';
 import 'package:my_final_project/widgets/circlulat-button.dart';
 import 'package:my_final_project/widgets/exercice-card.dart';
 
+import 'auth/widgets/delete.dart';
 import 'exercice-screen.dart';
 
 class MyExerciseScreen extends StatefulWidget {
@@ -120,8 +121,13 @@ class _MyExerciseScreenState extends State<MyExerciseScreen>
                                         builder: (context) => ExerciseScreen(
                                             exName: data['category name'])));
                               },
-                              child: categoryCard(data['category name'],
-                                  data['category description']),
+                              child: categoryCard(
+                                  data['category name'],
+                                  data['category description'],
+                                  context,
+                                  'Categories',
+                                  data.id,
+                                  deviceSize),
                             );
                           });
                     },

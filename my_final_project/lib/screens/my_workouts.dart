@@ -64,6 +64,21 @@ class _WorkoutsCardState extends State<WorkoutsCard> {
                               data['egzersiz3'] == 'egzersiz') {
                             return GestureDetector(
                               child: workoutCard(
+                                  data['egitim adı'],
+                                  data['score'].toString(),
+                                  data['RepNum'],
+                                  data['SetNum'],
+                                  data['egzersiz1'],
+                                  data['egzersiz2'],
+                                  data['egzersiz3'],
+                                  context,
+                                  'Egitimler',
+                                  data.id,
+                                  deviceSize),
+                            );
+                          }
+                          return GestureDetector(
+                            child: workoutCard(
                                 data['egitim adı'],
                                 data['score'].toString(),
                                 data['RepNum'],
@@ -71,19 +86,10 @@ class _WorkoutsCardState extends State<WorkoutsCard> {
                                 data['egzersiz1'],
                                 data['egzersiz2'],
                                 data['egzersiz3'],
-                              ),
-                            );
-                          }
-                          return GestureDetector(
-                            child: workoutCard(
-                              data['egitim adı'],
-                              data['score'].toString(),
-                              data['RepNum'],
-                              data['SetNum'],
-                              data['egzersiz1'],
-                              data['egzersiz2'],
-                              data['egzersiz3'],
-                            ),
+                                context,
+                                'Egitimler',
+                                data.id,
+                                deviceSize),
                           );
                         });
                   },
